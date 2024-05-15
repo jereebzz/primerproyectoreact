@@ -1,59 +1,58 @@
 import { Component } from 'react'
-import Boton from './Boton';
+import Boton from "./Boton";
 
 export default class Contador extends Component{
-  constructor(props) {
-    super(props);
-    this.state = { valor: 0 }
+  constructor(props){
+    super(props)
+    this.state ={
+      valor: 0
+    }
+  }
+  resta(){
+    this.setState({valor:this.state.valor-1})
   }
 
-  restar() {
-    this.setState({valor: this.state.valor - 1});
-    // NO => this.state.valor = xxxxx;
+  suma(){
+    this.setState({valor:this.state.valor+1})
   }
 
-  sumar() {
-    this.setState({valor: this.state.valor + 1});
+  dividir(){
+    this.setState({valor:this.state.valor/2})
   }
 
-  multiplicar() {
-    this.setState({valor: this.state.valor * 2});
+  multiplicar(){
+    this.setState({valor:this.state.valor*2})
   }
 
-  dividir() {
-    this.setState({valor: this.state.valor / 2});
-  }
 
-  render() {
+  componentDidMount(){
+    this.setState({valor:this.props.nuevoValor})
+  }
+  render(){
     return(
       <div className='Contador'>
-        <span className='Titulo'>{this.props.children}</span>
-        <span className='Valor'>{this.state.valor}</span>
-        <div className='>Botonera'>
-          <Boton 
-            simbolo='-'
-            accion={() => this.restar()}
-           />
-          <Boton 
-          simbolo='+'
-          accion={() => this.sumar()}
-          />
-          <Boton 
-          simbolo='* 2'
-          accion={() => this.multiplicar()}
-          />
-          <Boton 
-          simbolo='/ 2'
-          accion={() => this.dividir()}
-          />
+        <h1>{this.props.titulo}</h1>
+        <h2>{this.state.valor}</h2>
+        <div className="Botonera">
+          <Boton
+          click={() => this.resta()} 
+          titulo="-"/>
+          <Boton
+           click={() => this.suma()}
+          titulo="+"/>
+          <Boton
+           click={() => this.multiplicar()}
+          titulo="*2"/>
+          
+          <Boton
+           click={() => this.dividir()}
+          titulo="/2"/>
 
-        <Boton 
-          simbolo='X'
-          accion={() => this.props.eliminar()}
-          />
+          <Boton
+           click={() => this.props.eliminar()}
+          titulo="x"/>
         </div>
       </div>
     )
   }
-
 }

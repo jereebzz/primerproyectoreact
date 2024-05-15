@@ -1,19 +1,15 @@
 import { Component } from "react";
 
-export default class Boton extends Component {
-    constructor(props) {
-        super(props);
+export default class Boton extends Component{
+    constructor(props){
+        super(props)
     }
 
-    render() {
+    render(){
         return(
             <span 
             className="Boton" 
-            onClick={() => this.props.accion()}
-            >
-                {this.props.simbolo}
-            </span>
+            onClick={() => this.props.click()}>{this.props.titulo}</span>
         )
     }
-
 }

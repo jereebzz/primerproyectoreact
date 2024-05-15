@@ -1,40 +1,46 @@
 import { Component } from 'react'
-import Contador from './componentes/Contador'
-import Formulario from './componentes/Formulario'
+import Contador from './componentes/Contador';
+import Formulario from  './componentes/Formulario';
 import './App.css'
 
-// const contadores = ["Alumnos" , "Profesores" , "Aulas" , "Etc" , "Etc"]
-
 export default class App extends Component{
-  constructor (props){
-super(props);
-this.state = {
-  contadores: []
-}
+  constructor(props){
+    super(props)
+    this.state ={
+      contadores : []
+    }}
+
+  guardarContador(nombre, numero){
+    let nuevosContadores = this.state.contadores;
+    let contador={
+      nombre:nombre, numero:numero
+    }
+    nuevosContadores.push(contador);
+    this.setState({contadores:nuevosContadores})
   }
 
-  guardar(nombre){
-   let nuevosContadores = this.state.contadores;
-   nuevosContadores.push(nombre);
-   this.setState({contadores: nuevosContadores});
+  eliminarContador(index){
+    let nuevosContadores = this.state.contadores;
+    nuevosContadores.splice(index,1);
+    this.setState({contadores:nuevosContadores})
   }
-  
-  render() {
+  render(){
     return(
-      
-      <div className='Contenedor'>
-        <Formulario 
-        guardar={(nombre) => this.guardar(nombre)}
+      <div>
+        <Formulario
+        guardar={(nombre,numero) => this.guardarContador(nombre,numero)}
         />
-        <div className='ListaContadores'>
-          { this.state.contadores.map((cont,index) => 
-                  <Contador key={index}
-                  eliminar={()=> {}}
-                  >{cont}</Contador>
-                )}
+        <h1></h1>
+        <div className="Contadores">
+          {this.state.contadores.map((contador,index) =>
+          <Contador key={index} titulo={contador.nombre} eliminar={() => this.eliminarContador(index)}
+          nuevoValor={contador.numero}
+          />
+          )}
         </div>
       </div>
     )
   }
-
 }
+
+
